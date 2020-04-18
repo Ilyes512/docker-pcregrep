@@ -1,0 +1,24 @@
+name: Build Latest Image
+
+on:
+  push:
+    branches: [master]
+    paths-ignore:
+      - "*.md"
+      - .editorconfig
+      - renovate.json
+
+jobs:
+  build_latest:
+    name: Build latest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+          repository: ilyes512/pcregrep
+          tag_with_ref: true
+          tag_with_sha: true
+          add_git_labels: true
