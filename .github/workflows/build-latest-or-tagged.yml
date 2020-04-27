@@ -1,7 +1,8 @@
-name: Build Latest Image
+name: Build latest or tagged
 
 on:
   push:
+    tags: ["**"]
     branches: [master]
     paths-ignore:
       - "*.md"
@@ -9,8 +10,8 @@ on:
       - renovate.json
 
 jobs:
-  build_latest:
-    name: Build latest
+  build_latest_or_tagged:
+    name: Build latest or tagged
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
